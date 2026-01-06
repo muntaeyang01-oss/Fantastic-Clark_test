@@ -1,28 +1,28 @@
 import { SiteConfig } from './types.ts';
 
 export const DEFAULT_CONFIG: SiteConfig = {
-  siteName: 'NEWER VISION co.',
+  siteName: 'FANTASTIC CLARK',
   heroTitle: 'FANTASTIC CLARK PREMIUM',
   heroSub: 'VIP(정켓)이용 고객님은 경험이 많은 전문 에이전트와 함께해야 합니다.',
   agencyTitle: 'FANTASTIC CLARK AGENCY',
   agencyContent: `안녕하십니까. FANTASTIC CLARK 대표 John KIM입니다.
-귀사는 카지노 산업의 정켓을 운영하여 필리핀 카지노 산업을 20년동안 성장을 거둘 수 있도록, 필리핀 클락 카지노 발전의 발판 역할을 해 왔습니다.
+우리 FANTASTIC CLARK은 카지노 산업의 정켓을 운영하여 필리핀 카지노 산업을 20년 동안 성장을 거둘 수 있도록, 필리핀 클락 카지노 발전의 발판 역할을 해 왔습니다.
 또한, 코로나 시기에도 끝까지 버팀으로서 저력을 보여 왔습니다.
 
-현재 카지노 산업은 유례 없는 경기의 혹한기를 겪고 있으나, 이러한 위기를 극복하여 성장할 수 있는 DNA가 귀사에는 내재되어 있습니다.
+현재 카지노 산업은 유례 없는 경기의 혹한기를 겪고 있으나, 이러한 위기를 극복하여 성장할 수 있는 DNA가 FANTASTIC CLARK에는 내재되어 있습니다.
 이를 바탕으로 어떠한 상황 속에서도 ‘최고의 경쟁력’을 가진 회사로 도약하기 위해 고객님들께 더 나은 서비스를 제공하고 있습니다. 비슷해 보이지만 분명히 다른 차별화를 통해 고객님께 안전하고 의지할 수 있는 쉼터가 되겠습니다. 
 상생을 통해 사람을 잃지 않는 회사로 신뢰 있는 에이전시로 묵묵히 걸어가겠습니다.
 
 2026 병오년, 귀하의 건강과 풍요가 항상 함께하시길 바라겠습니다.
 
-NEWER VISION 대표 JOHN KIM`,
+FANTASTIC CLARK 대표 JOHN KIM`,
   aboutTitle: 'KEVIN MUN 이사',
   aboutContent: `주요약력
 
 1982 출생
 2001 영어영문 학사 입학
 2023 필리핀 AGENT 시작
-2025 NEWER VISION 입사. (대표에이전트 scout, 이사 선임)
+2025 FANTASTIC CLARK 입사. (대표에이전트 scout, 이사 선임)
 2026 1월 3일 블로그 '판타스틱 클락' 오픈.`,
   services: [
     { id: '1', title: 'FREE ROOM 제공', description: 'HANN, ROYCE, HILTON, POOL VILLA 등 \n숙소 서비스를 MINIMUM 조건 하에 제공해드립니다.\n빠른 상담 해드리겠습니다.', icon: 'Crown' },

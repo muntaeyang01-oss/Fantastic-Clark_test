@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
@@ -16,12 +15,12 @@ import { DEFAULT_CONFIG } from './constants.ts';
 const App: React.FC = () => {
   const [view, setView] = useState<ViewType>('USER');
   const [config, setConfig] = useState<SiteConfig>(() => {
-    const saved = localStorage.getItem('newer_vision_agency_config');
+    const saved = localStorage.getItem('fantastic_clark_v1_config');
     return saved ? JSON.parse(saved) : DEFAULT_CONFIG;
   });
 
   useEffect(() => {
-    localStorage.setItem('newer_vision_agency_config', JSON.stringify(config));
+    localStorage.setItem('fantastic_clark_v1_config', JSON.stringify(config));
   }, [config]);
 
   const toggleView = () => setView(prev => prev === 'USER' ? 'ADMIN' : 'USER');
@@ -66,6 +65,7 @@ const App: React.FC = () => {
           />
           <AgentCard 
             name={config.contactManager}
+            siteName={config.siteName}
             phoneNumber={config.phoneNumber}
             kakaoId={config.kakaoId}
             telegramId={config.telegramId}
