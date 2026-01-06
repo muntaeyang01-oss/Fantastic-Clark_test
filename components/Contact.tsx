@@ -3,12 +3,13 @@ import React from 'react';
 
 interface ContactProps {
   manager: string;
+  phoneNumber: string;
   kakaoId: string;
   telegramId: string;
   primaryColor: string;
 }
 
-const Contact: React.FC<ContactProps> = ({ manager, kakaoId, telegramId, primaryColor }) => {
+const Contact: React.FC<ContactProps> = ({ manager, phoneNumber, kakaoId, telegramId, primaryColor }) => {
   return (
     <div className="container mx-auto px-6">
       <div className="max-w-4xl mx-auto bg-zinc-900 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
@@ -24,6 +25,18 @@ const Contact: React.FC<ContactProps> = ({ manager, kakaoId, telegramId, primary
               <div>
                 <p className="text-xs text-zinc-500 uppercase tracking-widest">Manager</p>
                 <p className="text-xl font-bold">{manager}</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center bg-white/5 border border-white/10">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-xs text-zinc-500 uppercase tracking-widest">Phone</p>
+                <p className="text-xl font-bold">{phoneNumber}</p>
               </div>
             </div>
           </div>

@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ServiceItem } from '../types';
+import { ServiceItem } from '../types.ts';
 
 interface ServicesProps {
   services: ServiceItem[];
@@ -11,7 +10,7 @@ const Services: React.FC<ServicesProps> = ({ services, primaryColor }) => {
   return (
     <div className="container mx-auto px-6">
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-serif mb-4">OUR SERVICES</h2>
+        <h2 className="text-4xl md:text-5xl font-serif mb-4 uppercase">SERVICE</h2>
         <p className="text-zinc-500 uppercase tracking-[0.3em] text-sm">전문적인 케어 시스템</p>
       </div>
 
@@ -19,7 +18,13 @@ const Services: React.FC<ServicesProps> = ({ services, primaryColor }) => {
         {services.map((item) => (
           <div 
             key={item.id} 
-            className="p-10 bg-black/40 border border-white/5 rounded-3xl hover:border-yellow-500/50 transition-all group"
+            className="p-10 bg-black/40 border border-white/5 rounded-3xl transition-all group hover:bg-white/[0.02]"
+            style={{ 
+              // Using a subtle border transition with the primary color
+              borderColor: 'rgba(255,255,255,0.05)'
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = primaryColor + '80')}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.05)')}
           >
             <div className="mb-6 inline-block p-4 rounded-2xl bg-zinc-900 group-hover:scale-110 transition-transform">
               <svg 
@@ -33,7 +38,7 @@ const Services: React.FC<ServicesProps> = ({ services, primaryColor }) => {
               </svg>
             </div>
             <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-            <p className="text-zinc-500 leading-relaxed">
+            <p className="text-zinc-500 leading-relaxed whitespace-pre-wrap">
               {item.description}
             </p>
           </div>

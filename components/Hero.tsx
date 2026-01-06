@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface HeroProps {
@@ -8,6 +7,20 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ title, sub, primaryColor }) => {
+  // Function to highlight "CLARK" in purple
+  const renderTitle = (text: string) => {
+    if (!text.includes('CLARK')) return text;
+    
+    const parts = text.split('CLARK');
+    return (
+      <>
+        {parts[0]}
+        <span className="text-[#A855F7]">CLARK</span>
+        {parts[1]}
+      </>
+    );
+  };
+
   return (
     <div className="relative h-screen flex items-center justify-center overflow-hidden">
       {/* Background Overlay */}
@@ -28,16 +41,19 @@ const Hero: React.FC<HeroProps> = ({ title, sub, primaryColor }) => {
           Exclusive Experience
         </span>
         <h1 className="text-5xl md:text-8xl font-serif mb-8 leading-tight tracking-tight">
-          {title}
+          {renderTitle(title)}
         </h1>
-        <p className="text-lg md:text-xl text-zinc-400 mb-12 font-light leading-relaxed max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl mb-12 font-medium leading-relaxed max-w-2xl mx-auto" style={{ color: primaryColor }}>
           {sub}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
             href="#contact" 
-            className="px-10 py-4 rounded-full font-bold text-lg bg-yellow-500 text-black hover:bg-yellow-400 transition-all shadow-xl shadow-yellow-500/20"
-            style={{ backgroundColor: primaryColor }}
+            className="px-10 py-4 rounded-full font-bold text-lg text-black hover:opacity-90 transition-all shadow-xl"
+            style={{ 
+              backgroundColor: primaryColor,
+              boxShadow: `0 20px 25px -5px ${primaryColor}33` 
+            }}
           >
             상담 시작하기
           </a>

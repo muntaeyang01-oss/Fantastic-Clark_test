@@ -1,6 +1,5 @@
-
 import React, { useState } from 'react';
-import { SiteConfig, ServiceItem } from '../types';
+import { SiteConfig, ServiceItem } from '../types.ts';
 
 interface AdminDashboardProps {
   config: SiteConfig;
@@ -20,13 +19,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ config, setConfig, exit
     setLocalConfig(prev => ({ ...prev, [field]: value }));
   };
 
-  const updateService = (id: string, field: keyof ServiceItem, value: string) => {
-    setLocalConfig(prev => ({
-      ...prev,
-      services: prev.services.map(s => s.id === id ? { ...s, [field]: value } : s)
-    }));
-  };
-
   return (
     <div className="min-h-screen bg-zinc-950 text-white p-6 md:p-12 font-sans">
       <div className="max-w-6xl mx-auto">
@@ -44,7 +36,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ config, setConfig, exit
             </button>
             <button 
               onClick={handleSave}
-              className="px-6 py-2 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition-colors"
+              className="px-6 py-2 text-black font-bold rounded-lg hover:opacity-90 transition-colors"
+              style={{ backgroundColor: localConfig.primaryColor }}
             >
               저장하기
             </button>
@@ -52,36 +45,44 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ config, setConfig, exit
         </header>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content Area */}
           <div className="lg:col-span-2 space-y-8">
-            <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-sm">
+            <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl">
               <h2 className="text-xl font-bold mb-6 flex items-center">
-                <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                기본 정보 및 히어로 섹션
+                <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: localConfig.primaryColor }}></span>
+                기본 정보
               </h2>
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-6">
                 <div>
                   <label className="block text-xs uppercase text-zinc-500 mb-2">사이트 이름</label>
                   <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
+                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" 
                     value={localConfig.siteName}
                     onChange={(e) => updateField('siteName', e.target.value)}
                   />
                 </div>
+              </div>
+            </section>
+
+            <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl">
+              <h2 className="text-xl font-bold mb-6 flex items-center">
+                <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: localConfig.primaryColor }}></span>
+                AGENCY 소개 설정
+              </h2>
+              <div className="space-y-6">
                 <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">메인 타이틀</label>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">AGENCY 타이틀</label>
                   <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
-                    value={localConfig.heroTitle}
-                    onChange={(e) => updateField('heroTitle', e.target.value)}
+                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" 
+                    value={localConfig.agencyTitle}
+                    onChange={(e) => updateField('agencyTitle', e.target.value)}
                   />
                 </div>
-                <div className="md:col-span-2">
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">히어로 보조 텍스트</label>
+                <div>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">AGENCY 소개 문구</label>
                   <textarea 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none h-24 resize-none" 
-                    value={localConfig.heroSub}
-                    onChange={(e) => updateField('heroSub', e.target.value)}
+                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none h-32" 
+                    value={localConfig.agencyContent}
+                    onChange={(e) => updateField('agencyContent', e.target.value)}
                   />
                 </div>
               </div>
@@ -89,112 +90,63 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ config, setConfig, exit
 
             <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-sm">
               <h2 className="text-xl font-bold mb-6 flex items-center">
-                <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                에이전트 소개 (About)
+                <span className="w-2 h-2 rounded-full mr-2" style={{ backgroundColor: localConfig.primaryColor }}></span>
+                STAFF 소개 설정
               </h2>
               <div className="space-y-6">
                 <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">소개 제목</label>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">STAFF 타이틀</label>
                   <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
+                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" 
                     value={localConfig.aboutTitle}
                     onChange={(e) => updateField('aboutTitle', e.target.value)}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">소개 본문</label>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">STAFF 소개 문구</label>
                   <textarea 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none h-48 resize-none" 
+                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none h-32" 
                     value={localConfig.aboutContent}
                     onChange={(e) => updateField('aboutContent', e.target.value)}
                   />
                 </div>
               </div>
             </section>
-
-            <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-sm">
-              <h2 className="text-xl font-bold mb-6 flex items-center">
-                <span className="w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                서비스 목록
-              </h2>
-              <div className="space-y-6">
-                {localConfig.services.map((service) => (
-                  <div key={service.id} className="p-4 bg-black rounded-xl border border-zinc-800">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <input 
-                        className="bg-transparent border-b border-zinc-800 py-2 focus:border-yellow-500 outline-none font-bold"
-                        value={service.title}
-                        onChange={(e) => updateService(service.id, 'title', e.target.value)}
-                        placeholder="서비스명"
-                      />
-                      <input 
-                        className="bg-transparent border-b border-zinc-800 py-2 focus:border-yellow-500 outline-none"
-                        value={service.description}
-                        onChange={(e) => updateService(service.id, 'description', e.target.value)}
-                        placeholder="설명"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
           </div>
 
-          {/* Sidebar Area */}
           <div className="space-y-8">
             <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-sm">
-              <h2 className="text-xl font-bold mb-6">연락처 설정</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">담당자 이름</label>
-                  <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
-                    value={localConfig.contactManager}
-                    onChange={(e) => updateField('contactManager', e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">카카오톡 ID</label>
-                  <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
-                    value={localConfig.kakaoId}
-                    onChange={(e) => updateField('kakaoId', e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">텔레그램 ID</label>
-                  <input 
-                    className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:border-yellow-500 outline-none" 
-                    value={localConfig.telegramId}
-                    onChange={(e) => updateField('telegramId', e.target.value)}
-                  />
+              <h2 className="text-xl font-bold mb-6">디자인 및 컬러</h2>
+              <div>
+                <label className="block text-xs uppercase text-zinc-500 mb-2">포인트 컬러</label>
+                <div className="flex items-center space-x-3">
+                  <input type="color" className="w-10 h-10 bg-transparent rounded cursor-pointer" value={localConfig.primaryColor} onChange={(e) => updateField('primaryColor', e.target.value)} />
+                  <span className="font-mono text-sm uppercase">{localConfig.primaryColor}</span>
                 </div>
               </div>
             </section>
 
             <section className="bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-sm">
-              <h2 className="text-xl font-bold mb-6">디자인 설정</h2>
+              <h2 className="text-xl font-bold mb-6">연락처 및 SNS</h2>
               <div className="space-y-4">
                 <div>
-                  <label className="block text-xs uppercase text-zinc-500 mb-2">포인트 컬러</label>
-                  <div className="flex items-center space-x-3">
-                    <input 
-                      type="color" 
-                      className="w-10 h-10 bg-transparent rounded cursor-pointer"
-                      value={localConfig.primaryColor}
-                      onChange={(e) => updateField('primaryColor', e.target.value)}
-                    />
-                    <span className="font-mono text-sm uppercase">{localConfig.primaryColor}</span>
-                  </div>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">담당자</label>
+                  <input className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" value={localConfig.contactManager} onChange={(e) => updateField('contactManager', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">전화번호</label>
+                  <input className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" value={localConfig.phoneNumber} onChange={(e) => updateField('phoneNumber', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">카카오톡</label>
+                  <input className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" value={localConfig.kakaoId} onChange={(e) => updateField('kakaoId', e.target.value)} />
+                </div>
+                <div>
+                  <label className="block text-xs uppercase text-zinc-500 mb-2">텔레그램</label>
+                  <input className="w-full bg-black border border-zinc-800 rounded-lg p-3 focus:outline-none" value={localConfig.telegramId} onChange={(e) => updateField('telegramId', e.target.value)} />
                 </div>
               </div>
             </section>
-
-            <div className="p-6 bg-yellow-500/10 border border-yellow-500/20 rounded-2xl">
-              <p className="text-sm text-yellow-500 leading-relaxed font-medium">
-                💡 변경 사항은 브라우저에 즉시 반영되며, '저장하기'를 눌러야 영구 보관됩니다. (LocalStorage 시뮬레이션)
-              </p>
-            </div>
           </div>
         </div>
       </div>

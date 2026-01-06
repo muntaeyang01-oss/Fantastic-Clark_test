@@ -10,7 +10,7 @@ const Footer: React.FC<FooterProps> = ({ siteName }) => {
     <footer className="bg-black border-t border-white/5 py-12">
       <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
         <div className="mb-8 md:mb-0 text-center md:text-left">
-          <h2 className="text-2xl font-black mb-2 tracking-tighter">{siteName}</h2>
+          <h2 className="text-2xl font-serif font-bold mb-2 tracking-tight italic">{siteName}</h2>
           <p className="text-zinc-600 text-xs uppercase tracking-widest">Premium Casino Agency Experience</p>
         </div>
         
